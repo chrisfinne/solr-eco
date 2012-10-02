@@ -1,0 +1,5 @@
+logs/**
+newrelic/logs/**
+solr/conf/dataimport*
+solr/collection*/data*
+.DS_Store
