@@ -92,47 +92,55 @@
    -->
         
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
-   <field name="sku" type="text_en_splitting_tight" indexed="true" stored="true" omitNorms="true"/>
-   <field name="name" type="text_general" indexed="true" stored="true"/>
-   <field name="manu" type="text_general" indexed="true" stored="true" omitNorms="true"/>
-   <field name="cat" type="string" indexed="true" stored="true" multiValued="true"/>
-   <field name="features" type="text_general" indexed="true" stored="true" multiValued="true"/>
-   <field name="includes" type="text_general" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true" />
+   <field name="db_id" type="int" indexed="true" stored="true" /> 
+   <field name="klass" type="string" indexed="true" stored="true" /> 
+   <field name="user_id" type="int" indexed="true" stored="false" /> 
 
-   <field name="weight" type="float" indexed="true" stored="true"/>
-   <field name="price"  type="float" indexed="true" stored="true"/>
-   <field name="popularity" type="int" indexed="true" stored="true" />
-   <field name="inStock" type="boolean" indexed="true" stored="true" />
+   <field name="name" type="text_general" indexed="true" stored="true" /> 
+   <field name="name_exact" type="string_nocase" indexed="true" stored="false" /> 
+   <field name="name_sort" type="alphaOnlySort" indexed="true" stored="false" /> 
 
-   <field name="store" type="location" indexed="true" stored="true"/>
-
-   <!-- Common metadata fields, named specifically to match up with
-     SolrCell metadata when parsing rich documents such as Word, PDF.
-     Some fields are multiValued only because Tika currently may return
-     multiple values for them. Some metadata is parsed from the documents,
-     but there are some which come from the client context:
-       "content_type": From the HTTP headers of incoming stream
-       "resourcename": From SolrCell request param resource.name
-   -->
-   <field name="title" type="text_general" indexed="true" stored="true" multiValued="true"/>
-   <field name="subject" type="text_general" indexed="true" stored="true"/>
-   <field name="description" type="text_general" indexed="true" stored="true"/>
-   <field name="comments" type="text_general" indexed="true" stored="true"/>
-   <field name="author" type="text_general" indexed="true" stored="true"/>
-   <field name="keywords" type="text_general" indexed="true" stored="true"/>
-   <field name="category" type="text_general" indexed="true" stored="true"/>
-   <field name="resourcename" type="text_general" indexed="true" stored="true"/>
-   <field name="url" type="text_general" indexed="true" stored="true"/>
-   <field name="content_type" type="string" indexed="true" stored="true" multiValued="true"/>
-   <field name="last_modified" type="date" indexed="true" stored="true"/>
-   <field name="links" type="string" indexed="true" stored="true" multiValued="true"/>
-
-   <!-- Main body of document extracted by SolrCell.
-        NOTE: This field is not indexed by default, since it is also copied to "text"
-        using copyField below. This is to save space. Use this field for returning and
-        highlighting document content. Use the "text" field to search the content. -->
-   <field name="content" type="text_general" indexed="false" stored="true" multiValued="true"/>
+   <field name="address" type="text_general" indexed="true" stored="false" /> 
+   <field name="city" type="text_general" indexed="true" stored="true" /> 
+   <field name="state" type="string_nocase" indexed="true" stored="true" /> 
+   <field name="full_state" type="string_nocase" indexed="true" stored="false" /> 
+   <field name="zip" type="string_nocase" indexed="true" stored="false" /> 
+   <field name="country" type="string_nocase" indexed="true" stored="false" /> 
+   <field name="country_code" type="string_nocase" indexed="true" stored="false" /> 
    
+   <field name="contact_name" type="text_general" indexed="true" stored="true" /> 
+   <field name="contact_name_blank" type="boolean" indexed="true" stored="false" /> 
+   <field name="contact_last_name_sort" type="alphaOnlySort" indexed="true" stored="false" />
+   
+   <field name="phones" type="string_nocase" indexed="true" stored="false" multiValued="true" /> 
+   
+   <field name="email" type="string_nocase" indexed="true" stored="false" /> 
+   <field name="emails" type="string_nocase" indexed="true" stored="false" multiValued="true" /> 
+   <field name="tld" type="string_nocase" indexed="true" stored="false" multiValued="false" /> 
+   <field name="tlds" type="string_nocase" indexed="true" stored="false" multiValued="true" /> 
+
+   <field name="lat_lng" type="location" indexed="true" stored="false" multiValued="false" /> 
+
+   <field name="cp_score" type="int" indexed="true" stored="true" />
+   <field name="reputation" type="int" indexed="true" stored="true" />
+
+   <field name="group_id" type="int" indexed="true" stored="false" /> 
+   
+   <field name="facebook_friend_ids" type="long" indexed="true" stored="false" multiValued="true" /> 
+   <field name="facebook_id" type="long" indexed="true" stored="false" multiValued="false" /> 
+
+   <field name="path" type="string" indexed="false" stored="true" /> 
+   
+   <field name="content" type="text_general" indexed="true" stored="false" /> 
+
+   <field name="category_ids" type="int" indexed="true" stored="true" multiValued="true" />
+   <field name="category_names" type="text_general" indexed="true" stored="false" multiValued="true" /> 
+
+   <field name="businesses_count" type="int" indexed="true" stored="false" /> 
+   <field name="priority" type="int" indexed="true" stored="false" /> 
+
+   <field name="created_at" type="date" indexed="true" stored="false"/>
+   <field name="updated_at" type="date" indexed="true" stored="false"/>
 
    <!-- catchall field, containing all other searchable text fields (implemented
         via copyField further on in this schema  -->
@@ -142,20 +150,9 @@
         leading wildcard queries. -->
    <field name="text_rev" type="text_general_rev" indexed="true" stored="false" multiValued="true"/>
 
-   <!-- non-tokenized version of manufacturer to make it easier to sort or group
-        results by manufacturer.  copied from "manu" via copyField -->
-   <field name="manu_exact" type="string" indexed="true" stored="false"/>
-
-   <field name="payloads" type="payloads" indexed="true" stored="true"/>
-
    <field name="_version_" type="long" indexed="true" stored="true"/>
 
-   <!-- Uncommenting the following will create a "timestamp" field using
-        a default value of "NOW" to indicate when each document was indexed.
-     -->
-   <!--
    <field name="timestamp" type="date" indexed="true" stored="true" default="NOW" multiValued="false"/>
-     -->
 
    <!-- Dynamic field definitions allow using convention over configuration
        for fields via the specification of patterns to match field names. 
@@ -234,28 +231,6 @@
         is added to the index.  It's used either to index the same field differently,
         or to add multiple fields to the same field for easier/faster searching.  -->
 
-   <copyField source="cat" dest="text"/>
-   <copyField source="name" dest="text"/>
-   <copyField source="manu" dest="text"/>
-   <copyField source="features" dest="text"/>
-   <copyField source="includes" dest="text"/>
-   <copyField source="manu" dest="manu_exact"/>
-
-   <!-- Copy the price into a currency enabled field (default USD) -->
-   <copyField source="price" dest="price_c"/>
-
-   <!-- Text fields from SolrCell to search by default in our catch-all field -->
-   <copyField source="title" dest="text"/>
-   <copyField source="author" dest="text"/>
-   <copyField source="description" dest="text"/>
-   <copyField source="keywords" dest="text"/>
-   <copyField source="content" dest="text"/>
-   <copyField source="content_type" dest="text"/>
-   <copyField source="resourcename" dest="text"/>
-   <copyField source="url" dest="text"/>
-
-   <!-- Create a string version of author for faceting -->
-   <copyField source="author" dest="author_s"/>
 	
    <!-- Above, multiple source fields are copied to the [text] field. 
 	  Another way to map multiple source fields to the same 
@@ -404,6 +379,15 @@
     <fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
         <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="string_nocase" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+      <analyzer type="query">
+        <filter class="solr.LowerCaseFilterFactory"/>
       </analyzer>
     </fieldType>
 
