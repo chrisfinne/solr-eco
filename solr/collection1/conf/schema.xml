@@ -131,8 +131,8 @@
 
    <field name="path" type="string" indexed="false" stored="true" /> 
    
-   <field name="content" type="text_general" indexed="true" stored="false" /> 
-   <field name="high_content" type="text_general" indexed="true" stored="false" /> 
+   <field name="content" type="text_general" indexed="true" stored="false" multiValued="true" /> 
+   <field name="high_content" type="text_general" indexed="true" stored="false" multiValued="true" /> 
 
    <field name="category_ids" type="int" indexed="true" stored="true" multiValued="true" />
    <field name="category_names" type="text_general" indexed="true" stored="false" multiValued="true" /> 
