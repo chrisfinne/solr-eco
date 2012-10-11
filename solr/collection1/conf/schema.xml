@@ -100,6 +100,8 @@
    <field name="name_exact" type="string_nocase" indexed="true" stored="false" /> 
    <field name="name_sort" type="alphaOnlySort" indexed="true" stored="false" /> 
 
+   <field name="description" type="text_general" indexed="true" stored="true" /> 
+
    <field name="address" type="text_general" indexed="true" stored="false" /> 
    <field name="city" type="text_general" indexed="true" stored="true" /> 
    <field name="state" type="string_nocase" indexed="true" stored="true" /> 
@@ -109,6 +111,7 @@
    <field name="country_code" type="string_nocase" indexed="true" stored="false" /> 
    
    <field name="contact_name" type="text_general" indexed="true" stored="true" /> 
+   <field name="contact_name_exact" type="string_nocase" indexed="true" stored="false" /> 
    <field name="contact_name_blank" type="boolean" indexed="true" stored="false" /> 
    <field name="contact_last_name_sort" type="alphaOnlySort" indexed="true" stored="false" />
    
@@ -134,8 +137,8 @@
    <field name="content" type="text_general" indexed="true" stored="false" multiValued="true" /> 
    <field name="high_content" type="text_general" indexed="true" stored="false" multiValued="true" /> 
 
-   <field name="category_ids" type="int" indexed="true" stored="true" multiValued="true" />
-   <field name="category_names" type="text_general" indexed="true" stored="false" multiValued="true" /> 
+   <field name="category_ids" type="int" indexed="true" stored="false" multiValued="true" />
+   <field name="category_names" type="text_general" indexed="false" stored="false" multiValued="true" /> 
 
    <field name="businesses_count" type="int" indexed="true" stored="false" /> 
    <field name="priority" type="int" indexed="true" stored="false" /> 
