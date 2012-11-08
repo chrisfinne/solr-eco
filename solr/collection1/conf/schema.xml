@@ -96,21 +96,21 @@
    <field name="klass" type="string" indexed="true" stored="true" /> 
    <field name="user_id" type="int" indexed="true" stored="false" /> 
 
-   <field name="name" type="text_general" indexed="true" stored="true" /> 
+   <field name="name" type="text_en" indexed="true" stored="true" /> 
    <field name="name_exact" type="string_nocase" indexed="true" stored="false" /> 
    <field name="name_sort" type="alphaOnlySort" indexed="true" stored="false" /> 
 
-   <field name="description" type="text_general" indexed="true" stored="true" /> 
+   <field name="description" type="text_en" indexed="true" stored="true" /> 
 
-   <field name="address" type="text_general" indexed="true" stored="false" /> 
-   <field name="city" type="text_general" indexed="true" stored="true" /> 
+   <field name="address" type="text_en" indexed="true" stored="false" /> 
+   <field name="city" type="text_en" indexed="true" stored="true" /> 
    <field name="state" type="string_nocase" indexed="true" stored="true" /> 
    <field name="full_state" type="string_nocase" indexed="true" stored="false" /> 
    <field name="zip" type="string_nocase" indexed="true" stored="false" /> 
    <field name="country" type="string_nocase" indexed="true" stored="false" /> 
    <field name="country_code" type="string_nocase" indexed="true" stored="false" /> 
    
-   <field name="contact_name" type="text_general" indexed="true" stored="true" /> 
+   <field name="contact_name" type="text_en" indexed="true" stored="true" /> 
    <field name="contact_name_exact" type="string_nocase" indexed="true" stored="false" /> 
    <field name="contact_name_blank" type="boolean" indexed="true" stored="false" /> 
    <field name="contact_last_name_sort" type="alphaOnlySort" indexed="true" stored="false" />
@@ -135,7 +135,7 @@
    <field name="path" type="string" indexed="false" stored="true" /> 
 
    <field name="category_ids" type="int" indexed="true" stored="false" multiValued="true" />
-   <field name="category_names" type="text_general" indexed="false" stored="false" multiValued="true" /> 
+   <field name="category_names" type="text_en" indexed="false" stored="false" multiValued="true" /> 
 
    <field name="businesses_count" type="int" indexed="true" stored="false" /> 
    <field name="priority" type="int" indexed="true" stored="false" /> 
@@ -145,8 +145,8 @@
 
    <!-- catchall field, containing all other searchable text fields (implemented
         via copyField further on in this schema  -->
-   <field name="text" type="text_general" indexed="true" stored="false" multiValued="true"/>
-   <field name="high_text" type="text_general" indexed="true" stored="false" multiValued="true" /> 
+   <field name="text" type="text_en" indexed="true" stored="false" multiValued="true"/>
+   <field name="high_text" type="text_en" indexed="true" stored="false" multiValued="true" /> 
 
    <!-- catchall text field that indexes tokens both normally and in reverse for efficient
         leading wildcard queries. -->
