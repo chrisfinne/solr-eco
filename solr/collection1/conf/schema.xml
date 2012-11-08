@@ -133,9 +133,6 @@
    <field name="facebook_id" type="long" indexed="true" stored="false" multiValued="false" /> 
 
    <field name="path" type="string" indexed="false" stored="true" /> 
-   
-   <field name="content" type="text_general" indexed="true" stored="false" multiValued="true" /> 
-   <field name="high_content" type="text_general" indexed="true" stored="false" multiValued="true" /> 
 
    <field name="category_ids" type="int" indexed="true" stored="false" multiValued="true" />
    <field name="category_names" type="text_general" indexed="false" stored="false" multiValued="true" /> 
@@ -149,6 +146,7 @@
    <!-- catchall field, containing all other searchable text fields (implemented
         via copyField further on in this schema  -->
    <field name="text" type="text_general" indexed="true" stored="false" multiValued="true"/>
+   <field name="high_text" type="text_general" indexed="true" stored="false" multiValued="true" /> 
 
    <!-- catchall text field that indexes tokens both normally and in reverse for efficient
         leading wildcard queries. -->
